@@ -16,8 +16,8 @@ public class Demo {
         // 从环境变量中获取访问凭证。运行本代码示例之前，请确保已设置环境变量OSS_ACCESS_KEY_ID和OSS_ACCESS_KEY_SECRET。
 //        EnvironmentVariableCredentialsProvider credentialsProvider = CredentialsProviderFactory.newEnvironmentVariableCredentialsProvider();
 
-        String accessKeyId = "LTAI5t9grkA4FS8cnU7Dnv43";
-        String accessKeySecret = "o7nJvjWDU563GTaLqU1QLEpqJj2FlZ";
+        String accessKeyId = "your-access-key-id";
+        String accessKeySecret = "your-access-key-secret";
 
 
         // 填写Bucket名称，例如examplebucket。

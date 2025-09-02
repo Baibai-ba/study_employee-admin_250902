@@ -22,8 +22,8 @@ aliyun:
   oss:
     endpoint: https://oss-cn-hangzhou.aliyuncs.com
     bucketName: web-tlias-hongbin-001
-    accessKeyId: LTAI5t9grkA4FS8cnU7Dnv43
-    accessKeySecret: o7nJvjWDU563GTaLqU1QLEpqJj2FlZ
+    accessKeyId: your-access-key-id
+    accessKeySecret: your-access-key-secret
 
 #Spring事务管理日志
 logging:

@@ -28,10 +28,10 @@ public class AliOSSUtils {
     @Autowired
     private AliOSSProperties aliOSSProperties;
 
-//    private String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
-//    private String accessKeyId = "LTAI5t9grkA4FS8cnU7Dnv43";
-//    private String accessKeySecret = "o7nJvjWDU563GTaLqU1QLEpqJj2FlZ";
-//    private String bucketName = "web-tlias-hongbin-001";
+   private String endpoint = "https://oss-cn-hangzhou.aliyuncs.com";
+   private String accessKeyId = "your-access-key-id";
+   private String accessKeySecret = "your-access-key-secret";
+   private String bucketName = "web-tlias-hongbin-001";
 
     /**
      * 实现上传图片到OSS
