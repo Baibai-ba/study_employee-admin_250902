@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongbin.mapper.EmpMapper">
+
+    <sql id="empSearchCondition">
+        <where>
+            <if test="name != null">
+                name like concat('%',#{name},'%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <choose>
+                <when test="beginScope != null and endScope != null">
+                    and entrydate between #{beginScope} and #{endScope}
+                </when>
+                <when test="beginScope != null">
+                    and entrydate > #{beginScope}
+                </when>
+                <when test="endScope != null">
+                    and entrydate &lt;= #{endScope}
+                </when>
+            </choose>
+        </where>
+    </sql>
+
+    <select id="getEmpsList" resultType="com.hongbin.pojo.Emp">
+        select id,username,name,password,entrydate,gender,image,job,dept_id,create_time,update_time
+        from emp
+        <include refid="empSearchCondition"/>
+        order by update_time desc
+        limit #{startRow}, #{rows}
+    </select>
+
+
+
+
+
+
+    <select id="empsCount" resultType="java.lang.Long">
+        select count(*)
+        from emp
+        <include refid="empSearchCondition"/>
+    </select>
+
+    <delete id="deleteEmpsByIds">
+        delete from emp
+        where id in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <insert id="insertEmp">
+        insert into emp (username, name, gender, image, job, entrydate, dept_id, create_time, update_time)
+        values (#{username}, #{name}, #{gender}, #{image}, #{job}, #{entrydate}, #{deptId}, now(), now());
+    </insert>
+
+    <select id="getEmpById" resultType="com.hongbin.pojo.Emp">
+        select * from emp where id = #{id}
+    </select>
+
+    <select id="loginCheck" resultType="com.hongbin.pojo.Emp">
+        select * from emp where username = #{username} and password = #{password}
+    </select>
+
+    <!--
+    <select id="loginCheck" resultType="com.hongbin.pojo.Emp">
+        select * from emp where username = #{username} and password = #{password}
+    </select>
+
+    <select id="loginCheck" resultType="java.lang.Integer">
+        select count(*) from emp where username = #{username} and password = #{password}
+    </select>
+
+    <select id="loginCheck" resultType="java.lang.Integer">
+        select * from emp where username = #{username} and password = #{password}
+    </select>
+    -->
+
+    <update id="updateEmp">
+        update emp
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="deptId != null">
+                dept_id = #{deptId},
+            </if>
+            <if test="entrydate != null">
+                entrydate = #{entrydate},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            update_time = now()
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
